@@ -2,19 +2,13 @@ package com.morening.october_userlogin.view;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
@@ -36,7 +30,6 @@ public class AnimationImageButton extends FrameLayout {
     private ImageView mRotateView = null;
 
     private RotateAnimation mRotateAnim = null;
-    private boolean bIsRotAnimPlaying = false;
 
     public AnimationImageButton(Context context) {
         this(context, null);
@@ -65,6 +58,7 @@ public class AnimationImageButton extends FrameLayout {
         mRotateView = (ImageView) mView.findViewById(R.id.id_animation_image_button_rotate_view);
     }
 
+
     private void obtainStyledAtrrs(AttributeSet attrs) {
         TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.AnimationImageButton);
 
@@ -73,9 +67,11 @@ public class AnimationImageButton extends FrameLayout {
         ta.recycle();
     }
 
-    public void startAnimation(){
-
-        bIsRotAnimPlaying = false;
+    /*
+     * Start button scale down animation if invoke this function.
+     * And then show the progress
+     */
+    public void startAnimation(final onProgressStateCallback callback){
 
         ValueAnimator valueAnim = ValueAnimator.ofInt(getWidth(),
                 getResources().getDimensionPixelSize(R.dimen.animation_image_button_height));
@@ -84,7 +80,6 @@ public class AnimationImageButton extends FrameLayout {
             @Override
             public void onAnimationStart(Animator animation) {
                 super.onAnimationStart(animation);
-
                 setClickable(false);
             }
 
@@ -95,11 +90,27 @@ public class AnimationImageButton extends FrameLayout {
                 mRotateView.setVisibility(VISIBLE);
 
                 mRotateAnim = new RotateAnimation(0f, 359f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-                mRotateAnim.setRepeatCount(10);
+                mRotateAnim.setRepeatMode(Animation.RESTART);
+                mRotateAnim.setRepeatCount(Animation.INFINITE);
                 mRotateAnim.setDuration(1000);
                 mRotateView.setAnimation(mRotateAnim);
+                mRotateAnim.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+                        callback.onProgressStart();
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        callback.onProgressEnd();
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
                 mRotateAnim.startNow();
-                bIsRotAnimPlaying = true;
             }
         });
         valueAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -115,17 +126,16 @@ public class AnimationImageButton extends FrameLayout {
         valueAnim.start();
     }
 
-    public void cancelAnimation(OnCancelAnimationCallback callback){
-        if (mRotateAnim != null && bIsRotAnimPlaying){
-            mRotateAnim.cancel();
-            mRotateView.setVisibility(GONE);
-            bIsRotAnimPlaying = false;
-            callback.onCancel();
-        }
+    /*
+     * dismiss progress when need to stop the progress animation.
+     */
+    public void dismissProgress(){
+        mRotateAnim.cancel();
+        mRotateView.setVisibility(GONE);
     }
 
-    public interface OnCancelAnimationCallback{
-        void onCancel();
+    public interface onProgressStateCallback{
+        void onProgressStart();
+        void onProgressEnd();
     }
-
 }

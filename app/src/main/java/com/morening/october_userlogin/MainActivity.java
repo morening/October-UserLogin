@@ -14,8 +14,6 @@ import com.morening.october_userlogin.view.AnimationImageButton;
 
 public class MainActivity extends Activity {
 
-    private final Handler mHandler = new Handler();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,19 +29,19 @@ public class MainActivity extends Activity {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imageButton.startAnimation();
+                imageButton.startAnimation(new AnimationImageButton.onProgressStateCallback(){
 
-                mHandler.postDelayed(new Runnable() {
                     @Override
-                    public void run() {
-                        imageButton.cancelAnimation(new AnimationImageButton.OnCancelAnimationCallback() {
-                            @Override
-                            public void onCancel() {
-
-                            }
-                        });
+                    public void onProgressStart() {
+                        //Todo implement operation when start progress
                     }
-                }, 5000);
+
+                    @Override
+                    public void onProgressEnd() {
+                        //Todo implement operation when end progress
+                    }
+                });
+
             }
         });
     }
