@@ -4,8 +4,8 @@
 
     <FrameLayout
         android:id="@+id/id_simple_edittext_title_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="32dp"
+        android:layout_height="32dp">
         <ImageView
             android:id="@+id/id_simple_editview_title_icon"
             android:layout_width="32dp"
@@ -21,12 +21,21 @@
             android:gravity="center"
             android:textColor="@android:color/white"/>
     </FrameLayout>
-    
+
+    <ImageView
+        android:id="@+id/id_simple_edittext_show_pwd_icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="12dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/simple_edit_show_pwd_icon"
+        android:visibility="gone"/>
+
     <EditText
         android:id="@+id/id_simple_edittext_edit"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="32dp"
-        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
         android:layout_toRightOf="@id/id_simple_edittext_title_layout"
         android:textColor="@android:color/white"
         android:background="@drawable/simple_edittext_edit_bg"

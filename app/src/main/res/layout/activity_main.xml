@@ -38,6 +38,7 @@
             android:layout_marginTop="20dp"
             app:simple_edit_edit_hint="Password"
             app:simple_edit_is_password="true"
+            app:simple_edit_show_pwd="true"
             app:simple_edit_title_icon="@drawable/ic_simple_edittext_password"/>
 
     </LinearLayout>

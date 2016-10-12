@@ -4,12 +4,14 @@
     <attr name="simple_edit_title_text" format="string"/>
     <attr name="simple_edit_edit_hint" format="string"/>
     <attr name="simple_edit_is_password" format="boolean"/>
+    <attr name="simple_edit_show_pwd" format="boolean"/>
 
     <declare-styleable name="SimpleEditView">
         <attr name="simple_edit_title_icon"/>
         <attr name="simple_edit_title_text"/>
         <attr name="simple_edit_edit_hint"/>
         <attr name="simple_edit_is_password"/>
+        <attr name="simple_edit_show_pwd"/>
     </declare-styleable>
 
     <declare-styleable name="AnimationImageButton">
