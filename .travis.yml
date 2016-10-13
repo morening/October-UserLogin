@@ -5,8 +5,9 @@ android:
   components:
     - build-tools-24.0.3
     - android-23
-    - platform-tools
-    - tools
+    
+  licenses:
+    - 'android-sdk-license-.+'
 
 before_install:
   - chmod +x gradlew
