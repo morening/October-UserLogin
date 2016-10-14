@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="simple_edit_title_icon" format="reference"/>
-    <attr name="simple_edit_title_text" format="string"/>
-    <attr name="simple_edit_edit_hint" format="string"/>
-    <attr name="simple_edit_is_password" format="boolean"/>
-    <attr name="simple_edit_show_pwd" format="boolean"/>
+    <attr name="title_icon" format="reference"/>
+    <attr name="title_text" format="string"/>
+    <attr name="edit_hint" format="string"/>
+    <attr name="enable_password" format="boolean"/>
+    <attr name="show_password" format="boolean"/>
+    <attr name="ime_option" format="string"/>
 
     <declare-styleable name="SimpleEditView">
-        <attr name="simple_edit_title_icon"/>
-        <attr name="simple_edit_title_text"/>
-        <attr name="simple_edit_edit_hint"/>
-        <attr name="simple_edit_is_password"/>
-        <attr name="simple_edit_show_pwd"/>
+        <attr name="title_icon"/>
+        <attr name="title_text"/>
+        <attr name="edit_hint"/>
+        <attr name="enable_password"/>
+        <attr name="show_password"/>
+        <attr name="ime_option"/>
     </declare-styleable>
 
     <declare-styleable name="AnimationImageButton">
