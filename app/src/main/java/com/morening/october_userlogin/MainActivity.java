@@ -1,18 +1,21 @@
 package com.morening.october_userlogin;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.os.Handler;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.morening.october_userlogin.activity.HomeActivity;
 import com.morening.october_userlogin.view.AnimationImageButton;
 import com.morening.october_userlogin.view.SimpleEditView;
 
@@ -21,6 +24,8 @@ public class MainActivity extends Activity {
     private AnimationImageButton mImageButton = null;
     private SimpleEditView mSimpleEditName = null;
     private SimpleEditView mSimpleEditPassword = null;
+
+    private Handler mHandler = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +37,19 @@ public class MainActivity extends Activity {
         getWindow().setStatusBarColor(Color.TRANSPARENT);
         getActionBar().hide();
 
+        mHandler = new Handler();
+
         mImageButton = (AnimationImageButton) findViewById(R.id.id_user_login_animation_button_login);
         mImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 doLogin();
+            }
+        });
+        mImageButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return false;
             }
         });
 
@@ -78,7 +91,22 @@ public class MainActivity extends Activity {
             @Override
             public void onProgressEnd() {
                 //Todo implement operation when end progress
+
+                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                ActivityOptions transitionActivityOptions =
+                        ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,
+                                mImageButton.getSharedElement(), "anim_button");
+                startActivity(intent, transitionActivityOptions.toBundle());
             }
         });
+
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mImageButton.dismissProgress();
+            }
+        }, 2000);
+
+
     }
 }

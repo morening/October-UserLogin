@@ -134,6 +134,11 @@ public class AnimationImageButton extends FrameLayout {
         mRotateView.setVisibility(GONE);
     }
 
+    public ImageView getSharedElement(){
+
+        return mButtonView;
+    }
+
     public interface onProgressStateCallback{
         void onProgressStart();
         void onProgressEnd();
