@@ -7,6 +7,10 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.transition.Explode;
+import android.transition.Slide;
+import android.transition.Transition;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -35,21 +39,24 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
-        getActionBar().hide();
 
         mHandler = new Handler();
 
+        setupTransition();
+        setupViews();
+    }
+
+    private void setupTransition() {
+        Explode enterExp = new Explode();
+        getWindow().setReturnTransition(enterExp);
+    }
+
+    private void setupViews() {
         mImageButton = (AnimationImageButton) findViewById(R.id.id_user_login_animation_button_login);
         mImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 doLogin();
-            }
-        });
-        mImageButton.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return false;
             }
         });
 
@@ -58,7 +65,7 @@ public class MainActivity extends Activity {
         mSimpleEditName.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_NEXT){
+                if (actionId == EditorInfo.IME_ACTION_NEXT) {
                     mSimpleEditPassword.requestFocus();
                     mSimpleEditPassword.setSelection(mSimpleEditPassword.getCount());
                 }
@@ -66,11 +73,11 @@ public class MainActivity extends Activity {
                 return false;
             }
         });
-        mSimpleEditPassword.setOnEditorActionListener(new EditText.OnEditorActionListener(){
+        mSimpleEditPassword.setOnEditorActionListener(new EditText.OnEditorActionListener() {
 
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE){
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
                     doLogin();
                 }
                 return false;
@@ -81,7 +88,7 @@ public class MainActivity extends Activity {
     private void doLogin() {
         // Todo do login logic
 
-        mImageButton.startAnimation(new AnimationImageButton.onProgressStateCallback(){
+        mImageButton.startAnimation(new AnimationImageButton.onProgressStateCallback() {
 
             @Override
             public void onProgressStart() {
@@ -92,11 +99,7 @@ public class MainActivity extends Activity {
             public void onProgressEnd() {
                 //Todo implement operation when end progress
 
-                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                ActivityOptions transitionActivityOptions =
-                        ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,
-                                mImageButton.getSharedElement(), "anim_button");
-                startActivity(intent, transitionActivityOptions.toBundle());
+                startHomePageWithSharedElement();
             }
         });
 
@@ -108,5 +111,13 @@ public class MainActivity extends Activity {
         }, 2000);
 
 
+    }
+
+    private void startHomePageWithSharedElement() {
+        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+        ActivityOptions transitionActivityOptions =
+                ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,
+                        mImageButton.getSharedElement(), "anim_button");
+        startActivity(intent, transitionActivityOptions.toBundle());
     }
 }

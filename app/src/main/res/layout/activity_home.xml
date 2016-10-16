@@ -1,17 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.morening.october_userlogin.activity.HomeActivity">
 
+    <LinearLayout
+        android:id="@+id/id_home_page_top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:elevation="2dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="26dp"/>
+
+        <Toolbar
+            android:id="@+id/id_home_page_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="240dp">
+
+        </FrameLayout>
+
+    </LinearLayout>
+
     <ImageView
-        android:id="@+id/id_home_imageview"
+        android:id="@+id/id_home_page_shared_element"
         android:layout_width="@dimen/animation_image_button_height"
         android:layout_height="@dimen/animation_image_button_height"
-        android:layout_centerInParent="true"
-        android:background="@drawable/login_image_button_bg"
-        android:transitionName="anim_button"/>
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="136dp"
+        android:transitionName="anim_button"
+        android:background="@drawable/login_image_button_bg"/>
 
-</RelativeLayout>
+</FrameLayout>
