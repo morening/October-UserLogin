@@ -95,11 +95,11 @@ public class SimpleEditView extends RelativeLayout {
                         if (bIsShowPwdEnabled){
                             bIsShowPwdEnabled = false;
                             mEditText.setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
-                            mShowPwdIcon.getBackground().setTint(Color.BLUE);
+                            mShowPwdIcon.setBackgroundResource(R.drawable.simple_edit_show_pwd_off_icon);
                         } else {
                             bIsShowPwdEnabled = true;
                             mEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
-                            mShowPwdIcon.getBackground().setTint(Color.GREEN);
+                            mShowPwdIcon.setBackgroundResource(R.drawable.simple_edit_show_pwd_icon);
                         }
                     }
                 });

@@ -91,6 +91,8 @@ public class HomeActivity extends Activity {
     private void setupViews() {
         mToolbar = (Toolbar) findViewById(R.id.id_home_page_toolbar);
         setActionBar(mToolbar);
+        getActionBar().setDisplayShowTitleEnabled(false);
+
         mTopView = findViewById(R.id.id_home_page_top_layout);
         mSharedElement = (ImageView) findViewById(R.id.id_home_page_shared_element);
     }

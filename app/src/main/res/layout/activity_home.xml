@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:elevation="2dp">
+        android:elevation="4dp">
 
         <View
             android:layout_width="match_parent"
@@ -20,11 +20,42 @@
         <Toolbar
             android:id="@+id/id_home_page_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="54dp"/>
+            android:layout_height="54dp"
+            android:contentInsetLeft="0dp"
+            android:contentInsetStart="0dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp">
+                <ImageView
+                    android:id="@+id/id_home_page_toolbar_slide_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:background="@drawable/home_slide_menu_icon"/>
+                <ImageView
+                    android:id="@+id/id_home_page_toolbar_settings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/home_settings_icon"
+                    android:backgroundTint="@android:color/white"/>
+            </RelativeLayout>
+        </Toolbar>
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="240dp">
+
+            <ImageView
+                android:id="@+id/id_home_page_user_photo"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_gravity="center_horizontal|top"
+                android:foreground="@drawable/home_page_user_photo_bg"
+                android:background="@drawable/home_page_user_photo_sample"/>
 
         </FrameLayout>
 

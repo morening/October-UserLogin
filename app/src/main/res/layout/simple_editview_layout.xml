@@ -28,7 +28,7 @@
         android:layout_height="32dp"
         android:layout_marginStart="12dp"
         android:layout_alignParentRight="true"
-        android:background="@drawable/simple_edit_show_pwd_icon"
+        android:background="@drawable/simple_edit_show_pwd_off_icon"
         android:visibility="gone"/>
 
     <EditText
