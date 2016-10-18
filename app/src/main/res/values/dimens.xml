@@ -1,4 +1,5 @@
 <resources>
     <dimen name="animation_image_button_corner_radius">24dp</dimen>
     <dimen name="animation_image_button_height">48dp</dimen>
+    <dimen name="home_page_user_photo_min_size">160dp</dimen>
 </resources>

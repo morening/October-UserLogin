@@ -51,11 +51,10 @@
 
             <ImageView
                 android:id="@+id/id_home_page_user_photo"
-                android:layout_width="160dp"
-                android:layout_height="160dp"
+                android:layout_width="@dimen/home_page_user_photo_min_size"
+                android:layout_height="@dimen/home_page_user_photo_min_size"
                 android:layout_gravity="center_horizontal|top"
-                android:foreground="@drawable/home_page_user_photo_bg"
-                android:background="@drawable/home_page_user_photo_sample"/>
+                android:foreground="@drawable/home_page_user_photo_bg"/>
 
         </FrameLayout>
 

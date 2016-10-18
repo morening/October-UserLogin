@@ -3,11 +3,19 @@ package com.morening.october_userlogin.activity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.transition.Explode;
 import android.transition.Slide;
 import android.transition.Transition;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -25,6 +33,7 @@ public class HomeActivity extends Activity {
     private Toolbar mToolbar = null;
     private View mTopView = null;
     private ImageView mSharedElement = null;
+    private ImageView mUserPhoto = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +48,31 @@ public class HomeActivity extends Activity {
 
         setupTransition();
         setupViews();
+        downloadUserPhoto();
+    }
+
+    private void downloadUserPhoto() {
+
+        // default user photo
+        Bitmap source = BitmapFactory.decodeResource(getResources(), R.drawable.home_page_user_photo_sample);
+        Bitmap photo = createCycleImage(source, getResources().getDimensionPixelSize(R.dimen.home_page_user_photo_min_size));
+        mUserPhoto.setImageBitmap(photo);
+
+        // download from network
+
+    }
+
+    private Bitmap createCycleImage(Bitmap source, int min) {
+
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        Bitmap target = Bitmap.createBitmap(min, min, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(target);
+        canvas.drawCircle(min/2, min/2, min/2, paint);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(source, 0, 0, paint);
+
+        return target;
     }
 
     private void setupTransition() {
@@ -95,6 +129,7 @@ public class HomeActivity extends Activity {
 
         mTopView = findViewById(R.id.id_home_page_top_layout);
         mSharedElement = (ImageView) findViewById(R.id.id_home_page_shared_element);
+        mUserPhoto = (ImageView) findViewById(R.id.id_home_page_user_photo);
     }
 
     @Override
