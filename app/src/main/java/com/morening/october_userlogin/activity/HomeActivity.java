@@ -10,18 +10,13 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.transition.Explode;
 import android.transition.Slide;
 import android.transition.Transition;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewAnimationUtils;
-import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.Toolbar;
@@ -123,13 +118,13 @@ public class HomeActivity extends Activity {
     }
 
     private void setupViews() {
-        mToolbar = (Toolbar) findViewById(R.id.id_home_page_toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.id_profile_toolbar);
         setActionBar(mToolbar);
         getActionBar().setDisplayShowTitleEnabled(false);
 
-        mTopView = findViewById(R.id.id_home_page_top_layout);
+        mTopView = findViewById(R.id.id_profile_toolbar_layout);
         mSharedElement = (ImageView) findViewById(R.id.id_home_page_shared_element);
-        mUserPhoto = (ImageView) findViewById(R.id.id_home_page_user_photo);
+        mUserPhoto = (ImageView) findViewById(R.id.id_profile_user_photo);
     }
 
     @Override

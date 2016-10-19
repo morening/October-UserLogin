@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.morening.october_userlogin.activity.HomeActivity">
+    tools:context="com.morening.october_userlogin.fragment.ProfileFragment">
 
     <LinearLayout
         android:id="@+id/id_profile_toolbar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:elevation="4dp">
+        android:elevation="4dp"
+        android:background="@color/app_actionbar_base_color">
 
         <View
             android:layout_width="match_parent"
@@ -45,29 +45,56 @@
             </RelativeLayout>
         </Toolbar>
 
-        <FrameLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="240dp">
+            android:layout_height="180dp">
 
             <ImageView
                 android:id="@+id/id_profile_user_photo"
                 android:layout_width="@dimen/home_page_user_photo_min_size"
                 android:layout_height="@dimen/home_page_user_photo_min_size"
-                android:layout_gravity="center_horizontal|top"
-                android:foreground="@drawable/home_page_user_photo_bg"
-                android:scaleType="fitXY"/>
+                android:layout_centerHorizontal="true"
+                android:foreground="@drawable/home_page_user_photo_bg"/>
 
-        </FrameLayout>
+            <View
+                android:id="@+id/id_profile_divider"
+                android:layout_width="2dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_below="@id/id_profile_user_photo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@android:color/white"/>
 
+            <TextView
+                android:id="@+id/id_profile_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_toLeftOf="@id/id_profile_divider"
+                android:layout_below="@id/id_profile_user_photo"
+                android:layout_marginTop="20dp"
+                android:gravity="right"
+                android:text="morening"
+                style="@style/ProfileTextStyle"/>
+
+            <TextView
+                android:id="@+id/id_profile_level"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_toEndOf="@id/id_profile_divider"
+                android:layout_below="@id/id_profile_user_photo"
+                android:layout_marginTop="20dp"
+                android:gravity="left"
+                android:text="engineer"
+                style="@style/ProfileTextStyle"/>
+
+        </RelativeLayout>
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/id_home_page_shared_element"
-        android:layout_width="@dimen/animation_image_button_height"
-        android:layout_height="@dimen/animation_image_button_height"
-        android:layout_gravity="top|center_horizontal"
-        android:layout_marginTop="136dp"
-        android:transitionName="anim_button"
-        android:background="@drawable/login_image_button_bg"/>
+    <android.support.v7.widget.RecyclerView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"/>
 
 </FrameLayout>
+
