@@ -7,4 +7,6 @@
     <color name="app_actionbar_base_color">#E91E63</color>
 
     <color name="button_bg_color">#E91E63</color>
+
+    <color name="app_base_color">#fafafa</color>
 </resources>
