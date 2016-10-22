@@ -1,5 +1,10 @@
 <resources>
     <dimen name="animation_image_button_corner_radius">24dp</dimen>
     <dimen name="animation_image_button_height">48dp</dimen>
-    <dimen name="home_page_user_photo_min_size">120dp</dimen>
+    <dimen name="home_user_photo_min_size">120dp</dimen>
+
+    <!--Home Page SlidingMenu-->
+    <dimen name="home_slidingmenu_behind_offset">200dp</dimen>
+    <dimen name="home_slidingmenu_shadow_width">10dp</dimen>
+    <dimen name="home_slidingmenu_left_menu_photo">80dp</dimen>
 </resources>

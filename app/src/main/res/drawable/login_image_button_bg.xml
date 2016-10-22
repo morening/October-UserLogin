@@ -6,7 +6,7 @@
         android:radius="@dimen/animation_image_button_corner_radius"/>
 
     <solid
-        android:color="#E91E63"/>
+        android:color="@color/app_actionbar_base_color"/>
 
     <size
         android:height="@dimen/animation_image_button_height"/>

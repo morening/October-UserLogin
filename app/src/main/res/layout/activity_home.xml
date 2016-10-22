@@ -1,73 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.morening.october_userlogin.activity.HomeActivity">
 
+    <ImageView
+        android:id="@+id/id_home_shared_toolbar"
+        android:layout_width="@dimen/animation_image_button_height"
+        android:layout_height="@dimen/animation_image_button_height"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/animation_image_button_scale_up_image_bg"
+        android:transitionName="@string/shared_login_button_home_toolbar"/>
+
     <LinearLayout
-        android:id="@+id/id_profile_toolbar_layout"
+        android:id="@+id/id_home_toolbar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:elevation="4dp">
+        android:elevation="4dp"
+        android:orientation="vertical">
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="26dp"/>
+            android:layout_height="26dp" />
 
         <Toolbar
             android:id="@+id/id_profile_toolbar"
             android:layout_width="match_parent"
             android:layout_height="54dp"
             android:contentInsetLeft="0dp"
-            android:contentInsetStart="0dp">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp">
-                <ImageView
-                    android:id="@+id/id_profile_toolbar_slide_menu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:background="@drawable/home_slide_menu_icon"/>
-                <ImageView
-                    android:id="@+id/id_profile_toolbar_settings"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:background="@drawable/home_settings_icon"
-                    android:backgroundTint="@android:color/white"/>
-            </RelativeLayout>
-        </Toolbar>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="240dp">
-
-            <ImageView
-                android:id="@+id/id_profile_user_photo"
-                android:layout_width="@dimen/home_page_user_photo_min_size"
-                android:layout_height="@dimen/home_page_user_photo_min_size"
-                android:layout_gravity="center_horizontal|top"
-                android:foreground="@drawable/home_page_user_photo_bg"
-                android:scaleType="fitXY"/>
-
-        </FrameLayout>
-
+            android:contentInsetStart="0dp" />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/id_home_page_shared_element"
-        android:layout_width="@dimen/animation_image_button_height"
-        android:layout_height="@dimen/animation_image_button_height"
-        android:layout_gravity="top|center_horizontal"
-        android:layout_marginTop="136dp"
-        android:transitionName="anim_button"
-        android:background="@drawable/login_image_button_bg"/>
+    <FrameLayout
+        android:id="@+id/id_home_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/id_home_toolbar_layout" />
 
-</FrameLayout>
+</RelativeLayout>

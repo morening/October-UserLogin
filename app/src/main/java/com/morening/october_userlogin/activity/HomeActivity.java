@@ -3,32 +3,26 @@ package com.morening.october_userlogin.activity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
 import android.os.Bundle;
-import android.transition.Slide;
+import android.transition.Explode;
 import android.transition.Transition;
-import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
-import android.widget.ImageView;
 import android.widget.Toolbar;
 
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.morening.october_userlogin.R;
 
 public class HomeActivity extends Activity {
 
     private Toolbar mToolbar = null;
-    private View mTopView = null;
-    private ImageView mSharedElement = null;
-    private ImageView mUserPhoto = null;
+    private View mToolbarLayout = null;
+    private SlidingMenu mSlidingMenu = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,36 +37,32 @@ public class HomeActivity extends Activity {
 
         setupTransition();
         setupViews();
-        downloadUserPhoto();
+        setupSlidingMenu();
     }
 
-    private void downloadUserPhoto() {
+    private void setupSlidingMenu() {
+        mSlidingMenu = new SlidingMenu(this);
+        mSlidingMenu.setMode(SlidingMenu.LEFT);
+        mSlidingMenu.setBehindOffsetRes(R.dimen.home_slidingmenu_behind_offset);
+        mSlidingMenu.setFadeDegree(0.35f);
+        mSlidingMenu.setBehindCanvasTransformer(new SlidingMenu.CanvasTransformer() {
+            @Override
+            public void transformCanvas(Canvas canvas, float percentOpen) {
+                canvas.scale(percentOpen, percentOpen, 0, canvas.getHeight()/2);
+            }
+        });
+        mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+        mSlidingMenu.setShadowWidthRes(R.dimen.home_slidingmenu_shadow_width);
+        mSlidingMenu.setShadowDrawable(R.drawable.slidingmenu_shadow_bg);
+        mSlidingMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
 
-        // default user photo
-        Bitmap source = BitmapFactory.decodeResource(getResources(), R.drawable.home_page_user_photo_sample);
-        Bitmap photo = createCycleImage(source, getResources().getDimensionPixelSize(R.dimen.home_page_user_photo_min_size));
-        mUserPhoto.setImageBitmap(photo);
-
-        // download from network
-
-    }
-
-    private Bitmap createCycleImage(Bitmap source, int min) {
-
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-        Bitmap target = Bitmap.createBitmap(min, min, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(target);
-        canvas.drawCircle(min/2, min/2, min/2, paint);
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        canvas.drawBitmap(source, 0, 0, paint);
-
-        return target;
+        View slidingmenu = LayoutInflater.from(this).inflate(R.layout.slidingmenu_left_menu_layout, null);
+        mSlidingMenu.setMenu(slidingmenu);
     }
 
     private void setupTransition() {
-        Slide enterSlide = new Slide(Gravity.RIGHT);
-        enterSlide.addListener(new Transition.TransitionListener() {
+        Explode explode = new Explode();
+        explode.addListener(new Transition.TransitionListener() {
             @Override
             public void onTransitionStart(Transition transition) {
 
@@ -80,20 +70,21 @@ public class HomeActivity extends Activity {
 
             @Override
             public void onTransitionEnd(Transition transition) {
-                Animator anim = ViewAnimationUtils.createCircularReveal(mTopView, (mTopView.getLeft()+mTopView.getRight())/2, (mTopView.getTop()+mTopView.getBottom())/2, 0, mTopView.getWidth());
+                Animator anim = ViewAnimationUtils.createCircularReveal(mToolbarLayout, (mToolbarLayout.getLeft()+mToolbarLayout.getRight())/2, (mToolbarLayout.getTop()+mToolbarLayout.getBottom())/2, 0, mToolbarLayout.getWidth());
                 anim.setDuration(500);
                 anim.setInterpolator(new LinearInterpolator());
                 anim.addListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationStart(Animator animation) {
                         super.onAnimationStart(animation);
-                        mTopView.setBackgroundColor(getResources().getColor(R.color.button_bg_color));
+                        mToolbarLayout.setBackgroundColor(getResources().getColor(R.color.button_bg_color));
                     }
 
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         super.onAnimationEnd(animation);
-                        mSharedElement.setVisibility(View.GONE);
+                        View sharedView = findViewById(R.id.id_home_shared_toolbar);
+                        sharedView.setVisibility(View.GONE);
                     }
                 });
                 anim.start();
@@ -114,7 +105,7 @@ public class HomeActivity extends Activity {
 
             }
         });
-        getWindow().setEnterTransition(enterSlide);
+        getWindow().setEnterTransition(explode);
     }
 
     private void setupViews() {
@@ -122,9 +113,7 @@ public class HomeActivity extends Activity {
         setActionBar(mToolbar);
         getActionBar().setDisplayShowTitleEnabled(false);
 
-        mTopView = findViewById(R.id.id_profile_toolbar_layout);
-        mSharedElement = (ImageView) findViewById(R.id.id_home_page_shared_element);
-        mUserPhoto = (ImageView) findViewById(R.id.id_profile_user_photo);
+        mToolbarLayout = findViewById(R.id.id_home_toolbar_layout);
     }
 
     @Override

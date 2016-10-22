@@ -42,7 +42,7 @@ public class MainActivity extends Activity {
 
         mHandler = new Handler();
 
-        setupTransition();
+//        setupTransition();
         setupViews();
     }
 
@@ -117,7 +117,7 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(MainActivity.this, HomeActivity.class);
         ActivityOptions transitionActivityOptions =
                 ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,
-                        mImageButton.getSharedElement(), "anim_button");
+                        mImageButton.getSharedElement(), getResources().getString(R.string.shared_login_button_home_toolbar));
         startActivity(intent, transitionActivityOptions.toBundle());
     }
 }
