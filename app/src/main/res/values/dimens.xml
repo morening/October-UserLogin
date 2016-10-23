@@ -5,6 +5,7 @@
 
     <!--Home Page SlidingMenu-->
     <dimen name="home_slidingmenu_behind_offset">200dp</dimen>
-    <dimen name="home_slidingmenu_shadow_width">10dp</dimen>
+    <dimen name="home_slidingmenu_shadow_width">5dp</dimen>
+    <dimen name="home_slidingmenu_toolbar_height">80dp</dimen>
     <dimen name="home_slidingmenu_left_menu_photo">80dp</dimen>
 </resources>

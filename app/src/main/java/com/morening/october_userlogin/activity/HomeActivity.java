@@ -6,6 +6,8 @@ import android.app.Activity;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.transition.Explode;
 import android.transition.Transition;
 import android.view.LayoutInflater;
@@ -17,6 +19,8 @@ import android.widget.Toolbar;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.morening.october_userlogin.R;
+import com.morening.october_userlogin.adapter.HomeSlidingMenuAdapter;
+import com.morening.october_userlogin.model.HomeSlidingMenuModule;
 
 public class HomeActivity extends Activity {
 
@@ -56,7 +60,17 @@ public class HomeActivity extends Activity {
         mSlidingMenu.setShadowDrawable(R.drawable.slidingmenu_shadow_bg);
         mSlidingMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
 
+        setupMenuItems();
+    }
+
+    private void setupMenuItems() {
         View slidingmenu = LayoutInflater.from(this).inflate(R.layout.slidingmenu_left_menu_layout, null);
+        RecyclerView recyclerView = (RecyclerView) slidingmenu.findViewById(R.id.id_slidingmenu_left_menu_recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        recyclerView.setAdapter(new HomeSlidingMenuAdapter(this, HomeSlidingMenuModule.getMenuItems()));
+
+
         mSlidingMenu.setMenu(slidingmenu);
     }
 

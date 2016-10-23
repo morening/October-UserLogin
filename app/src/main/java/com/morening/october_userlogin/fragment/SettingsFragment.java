@@ -14,6 +14,7 @@ import com.morening.october_userlogin.R;
  */
 public class SettingsFragment extends Fragment {
 
+    public static final String TAG = "SettingsFragment";
 
     public SettingsFragment() {
         // Required empty public constructor

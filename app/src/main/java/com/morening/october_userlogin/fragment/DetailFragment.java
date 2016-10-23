@@ -14,6 +14,7 @@ import com.morening.october_userlogin.R;
  */
 public class DetailFragment extends Fragment {
 
+    public static final String TAG = "DetailFragment";
 
     public DetailFragment() {
         // Required empty public constructor

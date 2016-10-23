@@ -26,6 +26,8 @@ import java.util.List;
  */
 public class ProfileFragment extends Fragment {
 
+    public static final String TAG = "ProfileFragment";
+
     private View mView = null;
     private Toolbar mToolbar = null;
     private RecyclerView mRecyclerView = null;
