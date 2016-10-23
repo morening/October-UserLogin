@@ -64,14 +64,20 @@ public class HomeActivity extends Activity {
     }
 
     private void setupMenuItems() {
-        View slidingmenu = LayoutInflater.from(this).inflate(R.layout.slidingmenu_left_menu_layout, null);
-        RecyclerView recyclerView = (RecyclerView) slidingmenu.findViewById(R.id.id_slidingmenu_left_menu_recyclerview);
+        View slidingmenu = LayoutInflater.from(this).inflate(R.layout.slidingmenu_menu_layout, null);
+        RecyclerView recyclerView = (RecyclerView) slidingmenu.findViewById(R.id.id_slidingmenu_menu_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        recyclerView.setAdapter(new HomeSlidingMenuAdapter(this, HomeSlidingMenuModule.getMenuItems()));
-
+        recyclerView.setAdapter(
+                new HomeSlidingMenuAdapter(this, HomeSlidingMenuModule.getMenuItems()));
 
         mSlidingMenu.setMenu(slidingmenu);
+    }
+
+    public void hideSlidingMenu(){
+        if (mSlidingMenu != null && mSlidingMenu.isMenuShowing()){
+            mSlidingMenu.showContent();
+        }
     }
 
     private void setupTransition() {

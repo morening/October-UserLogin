@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/home_slidingmenu_item_width"
+    android:layout_height="@dimen/home_slidingmenu_item_height"
+    android:layout_margin="@dimen/home_slidingmenu_item_margin"
+    android:background="@drawable/home_slidingmenu_item_bg">
+
+    <TextView
+        android:id="@+id/id_home_slidingmenu_item_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/SlidingMneuTextStyle"
+        android:gravity="center"/>
+
+</RelativeLayout>

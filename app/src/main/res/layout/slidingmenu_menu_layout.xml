@@ -3,25 +3,25 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <View
-        android:id="@+id/id_slidingmenu_left_menu_toolbar"
+        android:id="@+id/id_slidingmenu_menu_toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/home_slidingmenu_toolbar_height"
         android:background="@color/app_actionbar_base_color"/>
     
     <ImageView
-        android:id="@+id/id_slidingmenu_left_menu_photo"
-        android:layout_width="@dimen/home_slidingmenu_left_menu_photo"
-        android:layout_height="@dimen/home_slidingmenu_left_menu_photo"
+        android:id="@+id/id_slidingmenu_menu_photo"
+        android:layout_width="@dimen/home_slidingmenu_menu_photo"
+        android:layout_height="@dimen/home_slidingmenu_menu_photo"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:layout_below="@id/id_slidingmenu_left_menu_toolbar"
+        android:layout_below="@id/id_slidingmenu_menu_toolbar"
         android:foreground="@drawable/slidingmenu_photo_stroke"/>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/id_slidingmenu_left_menu_recyclerview"
+        android:id="@+id/id_slidingmenu_menu_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/id_slidingmenu_left_menu_photo"
+        android:layout_below="@id/id_slidingmenu_menu_photo"
         android:layout_marginTop="50dp" />
     
 </RelativeLayout>
