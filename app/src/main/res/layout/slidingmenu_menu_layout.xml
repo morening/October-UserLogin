@@ -22,6 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/id_slidingmenu_menu_photo"
-        android:layout_marginTop="50dp" />
+        android:layout_marginTop="50dp"
+        android:paddingLeft="@dimen/home_slidingmenu_recyclerview_padding"
+        android:paddingRight="@dimen/home_slidingmenu_recyclerview_padding"/>
     
 </RelativeLayout>

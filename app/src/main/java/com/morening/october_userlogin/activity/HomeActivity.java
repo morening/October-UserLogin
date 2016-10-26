@@ -70,7 +70,6 @@ public class HomeActivity extends Activity {
 
         recyclerView.setAdapter(
                 new HomeSlidingMenuAdapter(this, HomeSlidingMenuModule.getMenuItems()));
-
         mSlidingMenu.setMenu(slidingmenu);
     }
 
