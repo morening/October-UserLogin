@@ -1,4 +1,4 @@
-package com.morening.october_userlogin.adapter;
+package com.morening.october_userlogin.view.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

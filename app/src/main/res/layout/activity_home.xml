@@ -4,7 +4,7 @@
     android:id="@+id/activity_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.morening.october_userlogin.activity.HomeActivity">
+    tools:context=".view.activity.HomeActivity">
 
     <ImageView
         android:id="@+id/id_home_shared_toolbar"

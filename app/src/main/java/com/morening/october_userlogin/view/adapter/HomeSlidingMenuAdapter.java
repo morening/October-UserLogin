@@ -1,22 +1,19 @@
-package com.morening.october_userlogin.adapter;
+package com.morening.october_userlogin.view.adapter;
 
-import android.app.Activity;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.morening.october_userlogin.R;
-import com.morening.october_userlogin.activity.HomeActivity;
-import com.morening.october_userlogin.fragment.DetailFragment;
-import com.morening.october_userlogin.fragment.HomeFragment;
-import com.morening.october_userlogin.fragment.SettingsFragment;
-import com.morening.october_userlogin.model.MenuItemModule;
+import com.morening.october_userlogin.view.activity.HomeActivity;
+import com.morening.october_userlogin.view.fragment.DetailFragment;
+import com.morening.october_userlogin.view.fragment.HomeFragment;
+import com.morening.october_userlogin.view.fragment.SettingsFragment;
+import com.morening.october_userlogin.view.model.MenuItemModule;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
-package com.morening.october_userlogin.model;
+package com.morening.october_userlogin.view.model;
 
-import com.morening.october_userlogin.fragment.DetailFragment;
-import com.morening.october_userlogin.fragment.HomeFragment;
-import com.morening.october_userlogin.fragment.SettingsFragment;
+import com.morening.october_userlogin.view.fragment.DetailFragment;
+import com.morening.october_userlogin.view.fragment.HomeFragment;
+import com.morening.october_userlogin.view.fragment.SettingsFragment;
 
 import java.util.ArrayList;
 import java.util.List;

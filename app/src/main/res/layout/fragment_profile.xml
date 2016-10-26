@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/app_base_color"
-    tools:context="com.morening.october_userlogin.fragment.ProfileFragment">
+    tools:context=".view.fragment.ProfileFragment">
 
     <LinearLayout
         android:id="@+id/id_home_toolbar_layout"

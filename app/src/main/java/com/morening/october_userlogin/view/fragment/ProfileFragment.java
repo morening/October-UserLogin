@@ -1,8 +1,6 @@
-package com.morening.october_userlogin.fragment;
+package com.morening.october_userlogin.view.fragment;
 
 
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,12 +9,11 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toolbar;
 
 import com.morening.october_userlogin.R;
-import com.morening.october_userlogin.adapter.DividerItemDecoration;
-import com.morening.october_userlogin.adapter.ProfileAdapter;
+import com.morening.october_userlogin.view.adapter.DividerItemDecoration;
+import com.morening.october_userlogin.view.adapter.ProfileAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

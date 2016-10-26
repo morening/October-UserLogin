@@ -8,26 +8,27 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.transition.Explode;
-import android.transition.Slide;
-import android.transition.Transition;
-import android.view.Gravity;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.morening.october_userlogin.activity.HomeActivity;
-import com.morening.october_userlogin.view.AnimationImageButton;
-import com.morening.october_userlogin.view.SimpleEditView;
+import com.morening.october_userlogin.presenter.ILoginPresenter;
+import com.morening.october_userlogin.presenter.impl.LoginPresenter;
+import com.morening.october_userlogin.view.ILoginView;
+import com.morening.october_userlogin.view.activity.HomeActivity;
+import com.morening.october_userlogin.view.custom.AnimationImageButton;
+import com.morening.october_userlogin.view.custom.SimpleEditView;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements ILoginView{
 
     private AnimationImageButton mImageButton = null;
     private SimpleEditView mSimpleEditName = null;
     private SimpleEditView mSimpleEditPassword = null;
+
+    private ILoginPresenter mLoginPresenter = null;
 
     private Handler mHandler = null;
 
@@ -40,9 +41,11 @@ public class MainActivity extends Activity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
 
+        mLoginPresenter = new LoginPresenter(this);
+
         mHandler = new Handler();
 
-//        setupTransition();
+        setupTransition();
         setupViews();
     }
 
@@ -56,7 +59,7 @@ public class MainActivity extends Activity {
         mImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                doLogin();
+                mLoginPresenter.login();
             }
         });
 
@@ -78,39 +81,11 @@ public class MainActivity extends Activity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    doLogin();
+                    mLoginPresenter.login();
                 }
                 return false;
             }
         });
-    }
-
-    private void doLogin() {
-        // Todo do login logic
-
-        mImageButton.startAnimation(new AnimationImageButton.onProgressStateCallback() {
-
-            @Override
-            public void onProgressStart() {
-                //Todo implement operation when start progress
-            }
-
-            @Override
-            public void onProgressEnd() {
-                //Todo implement operation when end progress
-
-                startHomePageWithSharedElement();
-            }
-        });
-
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mImageButton.dismissProgress();
-            }
-        }, 2000);
-
-
     }
 
     private void startHomePageWithSharedElement() {
@@ -119,5 +94,35 @@ public class MainActivity extends Activity {
                 ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,
                         mImageButton.getSharedElement(), getResources().getString(R.string.shared_login_button_home_toolbar));
         startActivity(intent, transitionActivityOptions.toBundle());
+    }
+
+    @Override
+    public void showProgress() {
+        // This is empty. Because there is a progressbar in the button
+    }
+
+    @Override
+    public void hideProgress() {
+        mImageButton.dismissProgress();
+    }
+
+    @Override
+    public void onLoginSuccess() {
+        startHomePageWithSharedElement();
+    }
+
+    @Override
+    public void onLoginFail() {
+        // todo implement login fail
+    }
+
+    @Override
+    public String getUserName() {
+        return mSimpleEditName.getText().toString();
+    }
+
+    @Override
+    public String getPassword() {
+        return mSimpleEditPassword.getText().toString();
     }
 }

@@ -1,4 +1,4 @@
-package com.morening.october_userlogin.view;
+package com.morening.october_userlogin.view.custom;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

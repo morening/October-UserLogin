@@ -1,4 +1,4 @@
-package com.morening.october_userlogin.util;
+package com.morening.october_userlogin.view.util;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

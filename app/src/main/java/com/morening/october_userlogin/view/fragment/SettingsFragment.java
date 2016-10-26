@@ -1,4 +1,4 @@
-package com.morening.october_userlogin.fragment;
+package com.morening.october_userlogin.view.fragment;
 
 
 import android.os.Bundle;

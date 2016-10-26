@@ -24,7 +24,7 @@
         android:layout_below="@id/id_center_base_line"
         android:orientation="vertical">
 
-        <com.morening.october_userlogin.view.SimpleEditView
+        <com.morening.october_userlogin.view.custom.SimpleEditView
             android:id="@+id/id_user_login_simple_edit_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
             app:title_icon="@drawable/ic_simple_edittext_user_name"
             app:ime_option="actionNext"/>
 
-        <com.morening.october_userlogin.view.SimpleEditView
+        <com.morening.october_userlogin.view.custom.SimpleEditView
             android:id="@+id/id_user_login_simple_edit_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
             android:textStyle="bold"/>
     </LinearLayout>
 
-    <com.morening.october_userlogin.view.AnimationImageButton
+    <com.morening.october_userlogin.view.custom.AnimationImageButton
         android:id="@+id/id_user_login_animation_button_login"
         android:layout_width="match_parent"
         android:layout_height="48dp"

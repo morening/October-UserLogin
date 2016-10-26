@@ -1,4 +1,4 @@
-package com.morening.october_userlogin.activity;
+package com.morening.october_userlogin.view.activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -19,8 +19,8 @@ import android.widget.Toolbar;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.morening.october_userlogin.R;
-import com.morening.october_userlogin.adapter.HomeSlidingMenuAdapter;
-import com.morening.october_userlogin.model.HomeSlidingMenuModule;
+import com.morening.october_userlogin.view.adapter.HomeSlidingMenuAdapter;
+import com.morening.october_userlogin.view.model.HomeSlidingMenuModule;
 
 public class HomeActivity extends Activity {
 
