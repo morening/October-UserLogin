@@ -9,11 +9,13 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.morening.october_userlogin.R;
@@ -24,12 +26,15 @@ import com.morening.october_userlogin.R;
 
 public class AnimationImageButton extends FrameLayout {
 
+    private final String TAG = "AnimationImageButton";
+
     private View mView = null;
-    private ImageView mButtonView = null;
     private TextView mTextView = null;
     private ImageView mRotateView = null;
 
     private RotateAnimation mRotateAnim = null;
+
+    private int mPreviousWidth = 0;
 
     public AnimationImageButton(Context context) {
         this(context, null);
@@ -53,9 +58,16 @@ public class AnimationImageButton extends FrameLayout {
         LayoutParams view_lp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         addView(mView, view_lp);
 
-        mButtonView = (ImageView) mView.findViewById(R.id.id_animation_image_button_button_view);
         mTextView = (TextView) mView.findViewById(R.id.id_animation_image_button_text_view);
         mRotateView = (ImageView) mView.findViewById(R.id.id_animation_image_button_rotate_view);
+
+        getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                mPreviousWidth = getWidth();
+            }
+        });
     }
 
 
@@ -71,9 +83,8 @@ public class AnimationImageButton extends FrameLayout {
      * Start button scale down animation if invoke this function.
      * And then show the progress
      */
-    public void startAnimation(final onProgressStateCallback callback){
-
-        ValueAnimator valueAnim = ValueAnimator.ofInt(getWidth(),
+    public void startScaleAnimation(){
+        ValueAnimator valueAnim = ValueAnimator.ofInt(mPreviousWidth,
                 getResources().getDimensionPixelSize(R.dimen.animation_image_button_height));
         valueAnim.addListener(new AnimatorListenerAdapter() {
 
@@ -88,40 +99,53 @@ public class AnimationImageButton extends FrameLayout {
                 super.onAnimationEnd(animation);
                 mTextView.setVisibility(GONE);
                 mRotateView.setVisibility(VISIBLE);
-
-                mRotateAnim = new RotateAnimation(0f, 359f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                mRotateAnim = new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
                 mRotateAnim.setRepeatMode(Animation.RESTART);
                 mRotateAnim.setRepeatCount(Animation.INFINITE);
                 mRotateAnim.setDuration(1000);
                 mRotateView.setAnimation(mRotateAnim);
-                mRotateAnim.setAnimationListener(new Animation.AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) {
-                        callback.onProgressStart();
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        callback.onProgressEnd();
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
-
-                    }
-                });
                 mRotateAnim.startNow();
             }
         });
         valueAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                ViewGroup.LayoutParams lp = mButtonView.getLayoutParams();
+                RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) getLayoutParams();
                 lp.width = (int) animation.getAnimatedValue();
-                mButtonView.requestLayout();
+                requestLayout();
             }
         });
         valueAnim.setDuration(1000);
+        valueAnim.setInterpolator(new LinearInterpolator());
+        valueAnim.start();
+    }
+
+    public void startRecoveryAnimation(){
+        ValueAnimator valueAnim = ValueAnimator.ofInt(
+                getResources().getDimensionPixelSize(R.dimen.animation_image_button_height),
+                mPreviousWidth);
+        valueAnim.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                super.onAnimationStart(animation);
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                mTextView.setVisibility(VISIBLE);
+                setClickable(true);
+            }
+        });
+        valueAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) getLayoutParams();
+                lp.width = (int) animation.getAnimatedValue();
+                requestLayout();
+            }
+        });
+        valueAnim.setDuration(500);
         valueAnim.setInterpolator(new LinearInterpolator());
         valueAnim.start();
     }
@@ -130,17 +154,14 @@ public class AnimationImageButton extends FrameLayout {
      * dismiss progress when need to stop the progress animation.
      */
     public void dismissProgress(){
-        mRotateAnim.cancel();
+        if (mRotateAnim != null){
+            mRotateAnim.cancel();
+        }
         mRotateView.setVisibility(GONE);
     }
 
-    public ImageView getSharedElement(){
+    public View getSharedElement(){
 
-        return mButtonView;
-    }
-
-    public interface onProgressStateCallback{
-        void onProgressStart();
-        void onProgressEnd();
+        return this;
     }
 }

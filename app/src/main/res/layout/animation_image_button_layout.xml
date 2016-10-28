@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="wrap_content">
-
-    <ImageView
-        android:id="@+id/id_animation_image_button_button_view"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/animation_image_button_height"
-        android:layout_gravity="center"
-        android:transitionName="@string/shared_login_button_home_toolbar"
-        android:background="@drawable/login_image_button_bg"/>
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:background="@drawable/login_image_button_bg"
+    android:transitionName="@string/shared_login_button_home_toolbar">
 
     <TextView
         android:id="@+id/id_animation_image_button_text_view"
@@ -26,5 +20,4 @@
         android:layout_gravity="center"
         android:background="@drawable/animation_image_button_rotate_view_bg"
         android:visibility="gone"/>
-
 </FrameLayout>

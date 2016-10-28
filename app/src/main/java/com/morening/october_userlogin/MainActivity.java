@@ -7,6 +7,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.transition.Explode;
 import android.view.KeyEvent;
 import android.view.View;
@@ -43,7 +44,7 @@ public class MainActivity extends Activity implements ILoginView{
 
         mLoginPresenter = new LoginPresenter(this);
 
-        mHandler = new Handler();
+        mHandler = new Handler(Looper.getMainLooper());
 
         setupTransition();
         setupViews();
@@ -98,22 +99,42 @@ public class MainActivity extends Activity implements ILoginView{
 
     @Override
     public void showProgress() {
-        // This is empty. Because there is a progressbar in the button
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                mImageButton.startScaleAnimation();
+            }
+        });
     }
 
     @Override
     public void hideProgress() {
-        mImageButton.dismissProgress();
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                mImageButton.dismissProgress();
+            }
+        });
     }
 
     @Override
     public void onLoginSuccess() {
-        startHomePageWithSharedElement();
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                startHomePageWithSharedElement();
+            }
+        });
     }
 
     @Override
     public void onLoginFail() {
-        // todo implement login fail
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                mImageButton.startRecoveryAnimation();
+            }
+        });
     }
 
     @Override

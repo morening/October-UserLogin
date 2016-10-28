@@ -12,19 +12,25 @@ import com.morening.october_userlogin.model.OnLoginCallback;
 public class LoginModel implements ILoginModel {
 
     @Override
-    public void doCheck(String userName, String password, OnLoginCallback callback) {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public void doCheck(final String userName, final String password, final OnLoginCallback callback) {
 
-        if (TextUtils.equals(userName, "morening") && TextUtils.equals(password, "123456")){
-            callback.onLoginSuccess();
-        } else if (TextUtils.equals(userName, "morening") || TextUtils.equals(password, "123456")){
-            callback.onLoginFail(1);
-        } else {
-            callback.onLoginFail(2);
-        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                if (TextUtils.equals(userName, "123") && TextUtils.equals(password, "123")){
+                    callback.onLoginSuccess();
+                } else if (TextUtils.equals(userName, "123") || TextUtils.equals(password, "123")){
+                    callback.onLoginFail(1);
+                } else {
+                    callback.onLoginFail(2);
+                }
+            }
+        }).start();
     }
 }

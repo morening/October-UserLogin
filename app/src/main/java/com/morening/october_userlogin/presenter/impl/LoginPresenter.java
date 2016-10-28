@@ -22,6 +22,8 @@ public class LoginPresenter implements ILoginPresenter {
 
     @Override
     public void login() {
+        mLoginView.showProgress();
+
         String userName = mLoginView.getUserName();
         String password = mLoginView.getPassword();
         mLoginModel.doCheck(userName, password, new OnLoginCallback() {
