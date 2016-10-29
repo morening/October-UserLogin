@@ -25,6 +25,7 @@
         android:layout_alignParentBottom="true"
         android:background="@color/app_actionbar_base_color">
         <TextView
+            android:id="@+id/id_slidingmenu_help_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -36,6 +37,7 @@
             android:textStyle="bold"
             android:textColor="@android:color/white"/>
         <TextView
+            android:id="@+id/id_slidingmenu_logout_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"

@@ -3,6 +3,7 @@ package com.morening.october_userlogin.view.activity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.morening.october_userlogin.MainActivity;
 import com.morening.october_userlogin.R;
 import com.morening.october_userlogin.view.adapter.HomeSlidingMenuAdapter;
 import com.morening.october_userlogin.view.model.HomeSlidingMenuModule;
@@ -104,6 +106,9 @@ public class HomeActivity extends Activity implements View.OnClickListener{
 
         ImageView photoImage = (ImageView) slidingmenu.findViewById(R.id.id_slidingmenu_menu_photo);
         photoImage.setOnClickListener(this);
+
+        View logoutBtn = slidingmenu.findViewById(R.id.id_slidingmenu_logout_btn);
+        logoutBtn.setOnClickListener(this);
     }
 
     public void hideSlidingMenu(){
@@ -197,6 +202,11 @@ public class HomeActivity extends Activity implements View.OnClickListener{
                 break;
             case R.id.id_home_toolbar_menu_btn:
                 showSlidingMenu();
+                break;
+            case R.id.id_slidingmenu_logout_btn:
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 break;
         }
     }
