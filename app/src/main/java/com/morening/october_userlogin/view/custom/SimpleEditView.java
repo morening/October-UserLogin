@@ -2,8 +2,8 @@ package com.morening.october_userlogin.view.custom;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.text.InputType;
+import android.text.Selection;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
@@ -86,7 +86,7 @@ public class SimpleEditView extends RelativeLayout {
         mEditText.setImeOptions(mImeOption);
         mShowPwdIcon = (ImageView) mView.findViewById(R.id.id_simple_edittext_show_pwd_icon);
         if (bIsPasswordStyle){
-            mEditText.setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+            mEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             if (bShowPwdStyle){
                 mShowPwdIcon.setVisibility(VISIBLE);
                 mShowPwdIcon.setOnClickListener(new OnClickListener() {
@@ -94,13 +94,14 @@ public class SimpleEditView extends RelativeLayout {
                     public void onClick(View v) {
                         if (bIsShowPwdEnabled){
                             bIsShowPwdEnabled = false;
-                            mEditText.setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+                            mEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                             mShowPwdIcon.setBackgroundResource(R.drawable.simple_edit_show_pwd_off_icon);
                         } else {
                             bIsShowPwdEnabled = true;
-                            mEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
+                            mEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                             mShowPwdIcon.setBackgroundResource(R.drawable.simple_edit_show_pwd_icon);
                         }
+                        Selection.setSelection(mEditText.getText(), mEditText.getText().length());
                     }
                 });
             } else {
