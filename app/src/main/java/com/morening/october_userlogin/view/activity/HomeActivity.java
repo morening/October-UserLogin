@@ -3,7 +3,6 @@ package com.morening.october_userlogin.view.activity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,18 +10,20 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.transition.Explode;
 import android.transition.Transition;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.morening.october_userlogin.R;
 import com.morening.october_userlogin.view.adapter.HomeSlidingMenuAdapter;
-import com.morening.october_userlogin.view.fragment.ProfileFragment;
 import com.morening.october_userlogin.view.model.HomeSlidingMenuModule;
 
 public class HomeActivity extends Activity implements View.OnClickListener{
@@ -30,16 +31,22 @@ public class HomeActivity extends Activity implements View.OnClickListener{
     private Toolbar mToolbar = null;
     private View mToolbarLayout = null;
     private SlidingMenu mSlidingMenu = null;
+    private ImageView mMenuBtn = null;
+    public HomeScenarioManager mScenMgr = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
         setContentView(R.layout.activity_home);
 
+        mScenMgr = new HomeScenarioManager(this);
+
         setupTransition();
         setupViews();
+        setupToolbar();
         setupSlidingMenu();
     }
 
@@ -58,6 +65,30 @@ public class HomeActivity extends Activity implements View.OnClickListener{
         mSlidingMenu.setShadowWidthRes(R.dimen.home_slidingmenu_shadow_width);
         mSlidingMenu.setShadowDrawable(R.drawable.slidingmenu_shadow_bg);
         mSlidingMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+        mSlidingMenu.setOnOpenListener(new SlidingMenu.OnOpenListener() {
+            @Override
+            public void onOpen() {
+                mMenuBtn.setVisibility(View.GONE);
+
+                TextView titleText = (TextView) mToolbar.findViewById(R.id.id_home_toolbar_title);
+                FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) titleText.getLayoutParams();
+                lp.gravity = Gravity.LEFT|Gravity.CENTER_VERTICAL;
+                titleText.requestLayout();
+            }
+        });
+        mSlidingMenu.setOnCloseListener(new SlidingMenu.OnCloseListener() {
+            @Override
+            public void onClose() {
+                mMenuBtn.setVisibility(View.VISIBLE);
+
+                TextView titleText = (TextView) mToolbar.findViewById(R.id.id_home_toolbar_title);
+                FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) titleText.getLayoutParams();
+                lp.gravity = Gravity.CENTER;
+                titleText.requestLayout();
+
+                titleText.setText(mScenMgr.getCurrentPageName());
+            }
+        });
 
         setupMenuItems();
     }
@@ -78,6 +109,12 @@ public class HomeActivity extends Activity implements View.OnClickListener{
     public void hideSlidingMenu(){
         if (mSlidingMenu != null && mSlidingMenu.isMenuShowing()){
             mSlidingMenu.showContent();
+        }
+    }
+
+    public void showSlidingMenu(){
+        if (mSlidingMenu != null && !mSlidingMenu.isMenuShowing()){
+            mSlidingMenu.showMenu();
         }
     }
 
@@ -131,9 +168,16 @@ public class HomeActivity extends Activity implements View.OnClickListener{
     }
 
     private void setupViews() {
-        mToolbar = (Toolbar) findViewById(R.id.id_profile_toolbar);
+        mScenMgr.goNextPage(HomeScenarioManager.HOME_HOME_PAGE);
+    }
+
+    private void setupToolbar() {
+        mToolbar = (Toolbar) findViewById(R.id.id_home_toolbar);
         setActionBar(mToolbar);
-        getActionBar().setDisplayShowTitleEnabled(false);
+        mMenuBtn = (ImageView) mToolbar.findViewById(R.id.id_home_toolbar_menu_btn);
+        mMenuBtn.setOnClickListener(this);
+        TextView titleText = (TextView) mToolbar.findViewById(R.id.id_home_toolbar_title);
+        titleText.setText(mScenMgr.getCurrentPageName());
 
         mToolbarLayout = findViewById(R.id.id_home_toolbar_layout);
     }
@@ -148,10 +192,11 @@ public class HomeActivity extends Activity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.id_slidingmenu_menu_photo:
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.id_home_container, new ProfileFragment());
-                ft.commit();
+                mScenMgr.goNextPage(HomeScenarioManager.HOME_PROFILE_PAGE);
                 hideSlidingMenu();
+                break;
+            case R.id.id_home_toolbar_menu_btn:
+                showSlidingMenu();
                 break;
         }
     }

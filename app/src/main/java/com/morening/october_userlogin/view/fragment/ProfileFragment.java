@@ -10,7 +10,6 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toolbar;
 
 import com.morening.october_userlogin.R;
 import com.morening.october_userlogin.view.activity.HomeActivity;

@@ -1,6 +1,5 @@
 package com.morening.october_userlogin.view.adapter;
 
-import android.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -10,6 +9,7 @@ import android.widget.TextView;
 
 import com.morening.october_userlogin.R;
 import com.morening.october_userlogin.view.activity.HomeActivity;
+import com.morening.october_userlogin.view.activity.HomeScenarioManager;
 import com.morening.october_userlogin.view.fragment.DetailFragment;
 import com.morening.october_userlogin.view.fragment.HomeFragment;
 import com.morening.october_userlogin.view.fragment.SettingsFragment;
@@ -47,16 +47,18 @@ public class HomeSlidingMenuAdapter extends RecyclerView.Adapter<HomeSlidingMenu
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction ft = mActivity.getFragmentManager().beginTransaction();
+
+                int nextPage = -1;
                 String tag = (String) v.getTag();
                 if (TextUtils.equals(HomeFragment.TAG, tag)){
-                    ft.replace(R.id.id_home_container, new HomeFragment());
+                    nextPage = HomeScenarioManager.HOME_HOME_PAGE;
                 } else if (TextUtils.equals(DetailFragment.TAG, tag)){
-                    ft.replace(R.id.id_home_container, new DetailFragment());
+                    nextPage = HomeScenarioManager.HOME_DETAIL_PAGE;
                 } else if (TextUtils.equals(SettingsFragment.TAG, tag)){
-                    ft.replace(R.id.id_home_container, new SettingsFragment());
+                    nextPage = HomeScenarioManager.HOME_SETTINGS_PAGE;
                 }
-                ft.commit();
+                mActivity.mScenMgr.goNextPage(nextPage);
+
                 mActivity.hideSlidingMenu();
             }
         });

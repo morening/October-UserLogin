@@ -27,12 +27,42 @@
             android:layout_height="26dp" />
 
         <Toolbar
-            android:id="@+id/id_profile_toolbar"
+            android:id="@+id/id_home_toolbar"
             android:layout_width="match_parent"
             android:layout_height="54dp"
             android:contentInsetLeft="0dp"
             android:contentInsetStart="0dp">
 
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp">
+                <ImageView
+                    android:id="@+id/id_home_toolbar_menu_btn"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/home_slide_menu_icon"/>
+
+                <TextView
+                    android:id="@+id/id_home_toolbar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textSize="16dp"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    android:text="1234"/>
+
+                <ImageView
+                    android:id="@+id/id_home_toolbar_question"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="right|center_vertical"
+                    android:background="@drawable/home_slide_question_icon"/>
+
+            </FrameLayout>
         </Toolbar>
     </LinearLayout>
 
