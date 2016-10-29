@@ -115,7 +115,7 @@ public class AnimationImageButton extends FrameLayout {
                 requestLayout();
             }
         });
-        valueAnim.setDuration(1000);
+        valueAnim.setDuration(500);
         valueAnim.setInterpolator(new LinearInterpolator());
         valueAnim.start();
     }
