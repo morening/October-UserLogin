@@ -70,5 +70,13 @@
         android:layout_marginTop="20dp"
         android:background="@color/app_actionbar_base_color"/>
 
+    <ProgressBar
+        android:id="@+id/id_profile_progressbar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        style="?android:progressBarStyleLarge"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+
 </RelativeLayout>
 

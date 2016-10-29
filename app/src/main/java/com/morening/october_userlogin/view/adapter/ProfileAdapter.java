@@ -21,8 +21,11 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
     private Context mContext = null;
     private List<Pair<String, String>> mDatas = null;
 
-    public ProfileAdapter(Context context, List<Pair<String, String>> info) {
+    public ProfileAdapter(Context context) {
         mContext = context;
+    }
+
+    public void setData(List<Pair<String, String>> info){
         mDatas = info;
     }
 
@@ -42,6 +45,9 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
 
     @Override
     public int getItemCount() {
+        if (mDatas == null){
+            return 0;
+        }
         return mDatas.size();
     }
 
