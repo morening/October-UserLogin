@@ -22,14 +22,14 @@ public class LoginModel implements ILoginModel {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
-                if (TextUtils.equals(userName, "123") && TextUtils.equals(password, "123")){
+                callback.onLoginSuccess();
+                /*if (TextUtils.equals(userName, "123") && TextUtils.equals(password, "123")){
                     callback.onLoginSuccess();
                 } else if (TextUtils.equals(userName, "123") || TextUtils.equals(password, "123")){
                     callback.onLoginFail(1);
                 } else {
                     callback.onLoginFail(2);
-                }
+                }*/
             }
         }).start();
     }

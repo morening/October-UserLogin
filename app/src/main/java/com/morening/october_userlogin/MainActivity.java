@@ -36,14 +36,11 @@ public class MainActivity extends Activity implements ILoginView{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
 
         mLoginPresenter = new LoginPresenter(this);
-
         mHandler = new Handler(Looper.getMainLooper());
 
         setupTransition();

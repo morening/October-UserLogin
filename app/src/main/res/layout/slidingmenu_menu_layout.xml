@@ -2,19 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <View
-        android:id="@+id/id_slidingmenu_menu_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/home_slidingmenu_toolbar_height"
-        android:background="@color/app_actionbar_base_color"/>
-    
     <ImageView
         android:id="@+id/id_slidingmenu_menu_photo"
         android:layout_width="@dimen/home_slidingmenu_menu_photo"
         android:layout_height="@dimen/home_slidingmenu_menu_photo"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:layout_below="@id/id_slidingmenu_menu_toolbar"
         android:foreground="@drawable/slidingmenu_photo_stroke"/>
 
     <android.support.v7.widget.RecyclerView
@@ -25,5 +18,34 @@
         android:layout_marginTop="50dp"
         android:paddingLeft="@dimen/home_slidingmenu_recyclerview_padding"
         android:paddingRight="@dimen/home_slidingmenu_recyclerview_padding"/>
-    
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/app_actionbar_base_color">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_weight="1"
+            android:text="Help"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_weight="1"
+            android:text="Log out"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+
 </RelativeLayout>
