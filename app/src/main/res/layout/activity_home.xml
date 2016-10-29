@@ -19,7 +19,7 @@
         android:id="@+id/id_home_toolbar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="4dp"
+        android:elevation="@dimen/home_toolbar_layout_elevation"
         android:orientation="vertical">
 
         <View
@@ -31,7 +31,9 @@
             android:layout_width="match_parent"
             android:layout_height="54dp"
             android:contentInsetLeft="0dp"
-            android:contentInsetStart="0dp" />
+            android:contentInsetStart="0dp">
+
+        </Toolbar>
     </LinearLayout>
 
     <FrameLayout

@@ -3,6 +3,7 @@ package com.morening.october_userlogin.view.activity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,14 +16,16 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
+import android.widget.ImageView;
 import android.widget.Toolbar;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.morening.october_userlogin.R;
 import com.morening.october_userlogin.view.adapter.HomeSlidingMenuAdapter;
+import com.morening.october_userlogin.view.fragment.ProfileFragment;
 import com.morening.october_userlogin.view.model.HomeSlidingMenuModule;
 
-public class HomeActivity extends Activity {
+public class HomeActivity extends Activity implements View.OnClickListener{
 
     private Toolbar mToolbar = null;
     private View mToolbarLayout = null;
@@ -67,6 +70,9 @@ public class HomeActivity extends Activity {
         recyclerView.setAdapter(
                 new HomeSlidingMenuAdapter(this, HomeSlidingMenuModule.getMenuItems()));
         mSlidingMenu.setMenu(slidingmenu);
+
+        ImageView photoImage = (ImageView) slidingmenu.findViewById(R.id.id_slidingmenu_menu_photo);
+        photoImage.setOnClickListener(this);
     }
 
     public void hideSlidingMenu(){
@@ -136,5 +142,21 @@ public class HomeActivity extends Activity {
     public void onBackPressed() {
         super.onBackPressed();
         finishAffinity();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.id_slidingmenu_menu_photo:
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.id_home_container, new ProfileFragment());
+                ft.commit();
+                hideSlidingMenu();
+                break;
+        }
+    }
+
+    public View getToolbarLayout(){
+        return mToolbarLayout;
     }
 }

@@ -11,7 +11,6 @@ import android.os.Looper;
 import android.transition.Explode;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -30,7 +29,6 @@ public class MainActivity extends Activity implements ILoginView{
     private SimpleEditView mSimpleEditPassword = null;
 
     private ILoginPresenter mLoginPresenter = null;
-
     private Handler mHandler = null;
 
     @Override

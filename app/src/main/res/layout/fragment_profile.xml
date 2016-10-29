@@ -14,22 +14,10 @@
         android:elevation="4dp"
         android:background="@color/app_actionbar_base_color">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="26dp"/>
-
-        <Toolbar
-            android:id="@+id/id_profile_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:contentInsetLeft="0dp"
-            android:contentInsetStart="0dp"
-            android:navigationIcon="@drawable/back_icon">
-        </Toolbar>
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:paddingBottom="20dp">
 
             <ImageView

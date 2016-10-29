@@ -1,25 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="wrap_content">
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:padding="15dp">
 
     <TextView
         android:id="@+id/id_profile_item_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"/>
+        android:layout_alignParentLeft="true"
+        android:textColor="@android:color/white"
+        android:textSize="18dp"/>
 
     <ImageView
         android:id="@+id/id_profile_item_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:background="@drawable/edit_icon"/>
+        android:background="@drawable/edit_icon"
+        android:backgroundTint="@android:color/white"
+        android:layout_alignParentBottom="true"/>
 
     <TextView
         android:id="@+id/id_profile_item_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/id_profile_item_edit"/>
+        android:layout_toLeftOf="@id/id_profile_item_edit"
+        android:textColor="@android:color/white"
+        android:textSize="18dp"
+        android:textStyle="bold"/>
 
 
 

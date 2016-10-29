@@ -1,6 +1,7 @@
 package com.morening.october_userlogin.view.fragment;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Toolbar;
 
 import com.morening.october_userlogin.R;
+import com.morening.october_userlogin.view.activity.HomeActivity;
 import com.morening.october_userlogin.view.adapter.DividerItemDecoration;
 import com.morening.october_userlogin.view.adapter.ProfileAdapter;
 
@@ -25,25 +27,41 @@ public class ProfileFragment extends Fragment {
 
     public static final String TAG = "ProfileFragment";
 
+    private Activity mActivity = null;
     private View mView = null;
-    private Toolbar mToolbar = null;
     private RecyclerView mRecyclerView = null;
 
     public ProfileFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mActivity = activity;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        if (mActivity instanceof HomeActivity){
+            ((HomeActivity)mActivity).getToolbarLayout().setElevation(0);
+        }
+
         mView = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        setupToolbar();
         setupRecyclerView();
 
         return mView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (mActivity instanceof HomeActivity){
+            ((HomeActivity)mActivity).getToolbarLayout().setElevation(getResources().getDimensionPixelSize(R.dimen.home_toolbar_layout_elevation));
+        }
     }
 
     private void setupRecyclerView() {
@@ -61,9 +79,4 @@ public class ProfileFragment extends Fragment {
         info.add(Pair.create("Barcode", "morening"));
         info.add(Pair.create("Address", "China"));
     }
-
-    private void setupToolbar() {
-        mToolbar = (Toolbar) mView.findViewById(R.id.id_profile_toolbar);
-    }
-
 }
